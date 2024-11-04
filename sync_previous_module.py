@@ -1,15 +1,3 @@
-"""
-Description:
-Note: Make sure that both the new and old module files are in same directory!
-
-This script helps you sync your previous module works with current modules.
-It takes 2 arguments, source_dir_name and destination_dir_name.
-All the files which will be moved are specified in files_to_sync.txt as newline separated strings
-
-Usage: python sync_previous_module.py <source_dir_name> <dest_dir_name>
-
-Ex:  python sync_previous_module.py mle-module-0-sauravpanda24 mle-module-1-sauravpanda24
-"""
 import os
 import shutil
 import sys
@@ -21,13 +9,16 @@ if len(sys.argv) != 3:
     sys.exit()
 
 # Get the users path to evaluate the username and root directory
-current_path = os.getcwd()
-grandparent_path = "/".join(current_path.split("/")[:-1])
+current_path = r"C:\Users\user\Documents\workspace\minitorch-module-1-volyachka"
+grandparent_path = r"C:\Users\user\Documents\workspace\minitorch-module-0-volyachka"
+
+print(current_path)
+print(grandparent_path)
 
 print("Looking for modules in : ", grandparent_path)
 
 # List of files which we want to move
-f = open("files_to_sync.txt", "r+")
+f = open(r"C:\Users\user\Documents\workspace\minitorch-module-1-volyachka\files_to_sync.txt", "r+")
 files_to_move = f.read().splitlines()
 f.close()
 
@@ -39,10 +30,13 @@ dest = sys.argv[2]
 try:
     for file in files_to_move:
         print(f"Moving file : ", file)
-        shutil.copy(
-            os.path.join(grandparent_path, source, file),
-            os.path.join(grandparent_path, dest, file),
-        )
+
+        # print(os.path.join(source, file))
+        # print(os.path.join(dest, file))
+        # shutil.copy(
+        #     os.path.join(source, file),
+        #     os.path.join(dest, file),
+        # )
     print(f"Finished moving {len(files_to_move)} files")
 except Exception as e:
     print(
